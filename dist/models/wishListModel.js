@@ -8,22 +8,22 @@ const wishlistItemSchema = new mongoose_1.default.Schema({
     productId: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "Product",
-        required: true
+        required: true,
     },
     addedAt: {
         type: Date,
-        default: Date.now
-    }
+        default: Date.now,
+    },
 }, { _id: false });
 const wishlistSchema = new mongoose_1.default.Schema({
     userId: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "User",
         required: true,
-        unique: true
+        unique: true,
     },
     products: [wishlistItemSchema],
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date }
+    updatedAt: { type: Date },
 });
 exports.default = mongoose_1.default.model("Wishlist", wishlistSchema);

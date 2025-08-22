@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const zod_1 = require("zod");
+const multer_1 = __importDefault(require("multer"));
 /**
  * Express error handler middleware (TypeScript version)
  */
@@ -32,9 +33,20 @@ const errorHandler = (err, req, res, next) => {
     // Zod validation error
     else if (err instanceof zod_1.ZodError) {
         statusCode = 400;
-        message = err.issues
-            .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
-            .join(", ");
+        message = err.issues.map((issue) => `${issue.path.join(".")}: ${issue.message}`).join(", ");
+    }
+    // Multer error
+    else if (err instanceof multer_1.default.MulterError) {
+        statusCode = 400;
+        if (err.code === "MISSING_FIELD_NAME") {
+            message = "Invalid request: expected multipart/form-data with file field";
+        }
+        else if (err.code === "LIMIT_FILE_SIZE") {
+            message = "File too large";
+        }
+        else {
+            message = `Upload error: ${err.message}`;
+        }
     }
     // Custom error with status and message
     else if (isErrorWithStatusAndMessage(err)) {
@@ -51,16 +63,9 @@ const errorHandler = (err, req, res, next) => {
 };
 // Type guard helpers
 function isMongoDuplicateError(error) {
-    return (typeof error === "object" &&
-        error !== null &&
-        "code" in error &&
-        error.code === 11000 &&
-        "keyValue" in error);
+    return typeof error === "object" && error !== null && "code" in error && error.code === 11000 && "keyValue" in error;
 }
 function isErrorWithStatusAndMessage(error) {
-    return (typeof error === "object" &&
-        error !== null &&
-        "status" in error &&
-        "message" in error);
+    return typeof error === "object" && error !== null && "status" in error && "message" in error;
 }
 exports.default = errorHandler;

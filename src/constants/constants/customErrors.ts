@@ -1,3 +1,5 @@
+import { NextFunction ,Request} from "express";
+
 // Bad Request Error (400)
 export class BadRequestError extends Error {
     status: number;
@@ -139,7 +141,10 @@ export class ResourceGoneError extends Error {
     }
 }
 
-export const BodyValidator = (schema: any, body: any) => {
+export const BodyValidator = (schema: any,body:any) => {
+    if(Object.keys(body).length==0){
+        throw new BadRequestError("Request body cannot be empty")
+    }
     const { error } = schema.validate(body, { abortEarly: false });
 
     if (error && error.details) {
@@ -149,4 +154,5 @@ export const BodyValidator = (schema: any, body: any) => {
         const errorMessage = messages.join(", "); // join all messages into one string
         throw new BadRequestError(errorMessage);
     }
+   return body;
 };

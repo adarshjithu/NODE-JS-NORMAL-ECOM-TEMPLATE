@@ -13,7 +13,7 @@ export class CouponController {
     // @route: POST /api/v1/admin/coupons
     async createCoupon(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            BodyValidator(createCouponSchema, req.body);
+             BodyValidator(createCouponSchema, req.body);
             const result = await this.couponService.createCoupon(req.body);
             res.status(STATUS_CODES.CREATED).json({ success: true, message: "Coupon created successfully", data: result });
         } catch (error) {
@@ -26,7 +26,7 @@ export class CouponController {
         try {
             const { couponId } = req.params;
             if (!mongoose.Types.ObjectId.isValid(couponId)) throw new NotFoundError("Invalid couponId");
-            BodyValidator(updateCouponSchema, req.body);
+            // BodyValidator(updateCouponSchema, req.body);
             const result = await this.couponService.updateCoupon(couponId, req.body);
             res.status(STATUS_CODES.OK).json({ success: true, message: "Coupon updated successfully", data: result });
         } catch (error) {

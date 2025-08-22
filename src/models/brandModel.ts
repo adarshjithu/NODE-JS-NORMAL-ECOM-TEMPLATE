@@ -18,7 +18,7 @@ const brandSchema = new Schema<IBrand>(
 
     // Soft delete fields
     isDeleted: { type: Boolean, default: false },
-    deletedAt: { type: Date }
+   
   },
   {
     timestamps: true

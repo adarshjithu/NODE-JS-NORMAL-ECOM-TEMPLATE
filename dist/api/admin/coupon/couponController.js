@@ -44,7 +44,7 @@ class CouponController {
                 const { couponId } = req.params;
                 if (!mongoose_1.default.Types.ObjectId.isValid(couponId))
                     throw new customErrors_1.NotFoundError("Invalid couponId");
-                (0, customErrors_1.BodyValidator)(couponValidator_1.updateCouponSchema, req.body);
+                // BodyValidator(updateCouponSchema, req.body);
                 const result = yield this.couponService.updateCoupon(couponId, req.body);
                 res.status(statusCodes_1.STATUS_CODES.OK).json({ success: true, message: "Coupon updated successfully", data: result });
             }

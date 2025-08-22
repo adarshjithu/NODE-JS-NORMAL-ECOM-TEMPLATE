@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const couponRouter_1 = __importDefault(require("../api/admin/coupon/couponRouter"));
+const brandRouter_1 = __importDefault(require("../api/admin/brand/brandRouter"));
 const adminRoutes = express_1.default.Router();
 adminRoutes.use('/coupons', couponRouter_1.default);
+adminRoutes.use('/brands', brandRouter_1.default);
 exports.default = adminRoutes;

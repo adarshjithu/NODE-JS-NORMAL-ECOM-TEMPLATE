@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GOOGLE_CLIENT_ID = exports.SECURE = exports.REFRESH_TOKEN_MAXAGE = exports.ACCESS_TOKEN_MAXAGE = exports.MONGODB_URI = exports.NODEMAILER_HOST = exports.NODEMAILER_SERVICE = exports.NODEMAILER_TRANSPORTER_PASSWORD = exports.NODEMAILER_TRANSPORTER_EMAIL = exports.REFRESH_TOKEN_EXPIRES_IN = exports.ACCESS_TOKEN_EXPIRES_IN = exports.JWT_REFRESH_SECRET = exports.JWT_ACCESS_SECRET = void 0;
+exports.CLOUD_STORAGE = exports.AWS_SECRET_ACCESS_KEY = exports.AWS_ACCESS_KEY_ID = exports.AWS_REGION = exports.GOOGLE_CLIENT_ID = exports.SECURE = exports.REFRESH_TOKEN_MAXAGE = exports.ACCESS_TOKEN_MAXAGE = exports.MONGODB_URI = exports.NODEMAILER_HOST = exports.NODEMAILER_SERVICE = exports.NODEMAILER_TRANSPORTER_PASSWORD = exports.NODEMAILER_TRANSPORTER_EMAIL = exports.REFRESH_TOKEN_EXPIRES_IN = exports.ACCESS_TOKEN_EXPIRES_IN = exports.JWT_REFRESH_SECRET = exports.JWT_ACCESS_SECRET = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 exports.JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
@@ -19,3 +19,7 @@ exports.ACCESS_TOKEN_MAXAGE = process.env.ACCESS_TOKEN_MAXAGE;
 exports.REFRESH_TOKEN_MAXAGE = process.env.REFRESH_TOKEN_MAXAGE;
 exports.SECURE = process.env.NODE_ENV === "production";
 exports.GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+exports.AWS_REGION = process.env.AWS_REGION;
+exports.AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
+exports.AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
+exports.CLOUD_STORAGE = process.env.CLOUD_STORAGE;
